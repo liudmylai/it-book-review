@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	List<Review> findAll();
 
-	List<Review> findByISBN(int isbn);
+	List<Review> findByIsbn(int isbn);
 
 	Optional<Review> findById(int id);
 }

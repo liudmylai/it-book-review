@@ -23,10 +23,16 @@ public class ReviewController {
 	public List<Review> getAllReviews() {
 		return reviewRepo.findAll();
 	}
+	
+	//get reviews by ISBN
+	@GetMapping("/reviews/{isbn}")
+	public List<Review> getReviewsByIsbn(@PathVariable int isbn) {
+		return reviewRepo.findByIsbn(isbn);
+	}
 
+	//get review by ID
 	@GetMapping("/review/{id}")
-	public ResponseEntity<Review> getStudentById(@PathVariable int id)
-	{
+	public ResponseEntity<Review> getReviewById(@PathVariable int id) {
 		Review review = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
 		return ResponseEntity.ok(review);                 
 	}
