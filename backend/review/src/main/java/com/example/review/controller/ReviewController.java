@@ -43,12 +43,23 @@ public class ReviewController {
 		return reviewRepo.save(review);
 	}
 	
+	//update review by ID
 	@PutMapping("/review/{id}")
 	public ResponseEntity<Review> updateReview(@PathVariable int id, @RequestBody Review review) {
 		Review r = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
 		r.updateFields(review);
 		Review updatedReview = reviewRepo.save(r);
 		return ResponseEntity.ok(updatedReview); 
+	}
+	
+	//delete review by ID
+	@DeleteMapping("/review/{id}")
+	public String deleteReview(@PathVariable int id) {
+		if (!reviewRepo.existsById(id)) {
+			throw new ResourceNotFoundException("Review not found");
+		}
+		reviewRepo.deleteById(id);
+	    return "The review with id: "+ id +" is removed from the database.";
 	}
 	
 }
