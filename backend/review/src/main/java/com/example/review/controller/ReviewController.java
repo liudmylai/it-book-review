@@ -36,5 +36,12 @@ public class ReviewController {
 		Review review = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
 		return ResponseEntity.ok(review);                 
 	}
+	
+	//create new review
+	@PostMapping("/review")
+	public Review newReview(@RequestBody Review review) {
+		return reviewRepo.save(review);
+	}
+
 
 }
