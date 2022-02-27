@@ -84,5 +84,12 @@ public class Review {
 		this.rate = rate;
 	}
 	
-	
+	public void updateFields(Review r) {
+		this.id = r.getId();
+		this.isbn = r.getIsbn();
+		this.name = r.getName();
+		this.review = r.getReview();
+		this.date = r.getDate();
+		this.rate = r.getRate();
+	}
 }

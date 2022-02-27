@@ -42,6 +42,13 @@ public class ReviewController {
 	public Review newReview(@RequestBody Review review) {
 		return reviewRepo.save(review);
 	}
-
-
+	
+	@PutMapping("/review/{id}")
+	public ResponseEntity<Review> updateReview(@PathVariable int id, @RequestBody Review review) {
+		Review r = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
+		r.updateFields(review);
+		Review updatedReview = reviewRepo.save(r);
+		return ResponseEntity.ok(updatedReview); 
+	}
+	
 }
