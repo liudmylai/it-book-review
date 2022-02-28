@@ -1,5 +1,7 @@
 package com.example.review.controller;
 
+import java.time.LocalDateTime; // Import the LocalDateTime class
+import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,10 @@ public class ReviewController {
 	//create new review
 	@PostMapping("/review")
 	public Review newReview(@RequestBody Review review) {
+	    LocalDateTime currentDate = LocalDateTime.now();
+	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String date = currentDate.format(dateFormat);
+		review.setDate(date);
 		return reviewRepo.save(review);
 	}
 	

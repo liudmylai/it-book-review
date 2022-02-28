@@ -1,6 +1,7 @@
 import * as ReviewsAPI from '../services/reviews-api';
 import ReviewItem from './ReviewItem';
 import { useState, useEffect } from 'react';
+import ReviewForm from './ReviewForm';
 
 
 function ReviewList() {
@@ -16,6 +17,7 @@ function ReviewList() {
     return(
         <div>
             {data && data.map((review, index) => <ReviewItem review={review} key={index} />)}
+            <ReviewForm />
         </div>
     );
 }

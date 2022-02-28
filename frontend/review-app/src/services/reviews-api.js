@@ -12,4 +12,8 @@ function getAllReviews() {
     return getAxios('reviews');
 }
 
-export {getAllReviews};
+function newReview(review) {
+    return axios.post(baseURL + 'review', review);
+}
+
+export {getAllReviews, newReview};
