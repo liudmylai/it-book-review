@@ -1,18 +1,11 @@
-import * as ReviewsAPI from '../services/reviews-api';
 import ReviewItem from './ReviewItem';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import ReviewForm from './ReviewForm';
+import { ReviewContext } from '../contexts/ReviewContext';
 
 
 function ReviewList() {
-    // state to store data
-    const [data, setData] = useState();
-    // use Effect Hook to get initial info from the server
-    useEffect(() => 
-        ReviewsAPI.getAllReviews()
-            .then(resultData => setData(resultData))
-        , []
-    );
+    const {data} = useContext(ReviewContext);
 
     return(
         <div>

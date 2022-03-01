@@ -1,36 +1,10 @@
-import { useEffect, useState } from "react";
-import { newReview } from "../services/reviews-api";
+import { useContext } from "react";
+import { ReviewContext } from "../contexts/ReviewContext";
 
 function ReviewForm() {
 
-    const [formData, setFormData] = useState({
-        name: '',
-        rate: '',
-        review: ''
-    });
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const {formData, handleChange, handleSubmit} = useContext(ReviewContext);
 
-    function handleChange(event) {
-        const {name, value} = event.target;
-        setFormData(prev => ({...prev, [name]: value}));
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        setIsSubmitted(true);
-    }
-
-    function resetForm() {
-        setIsSubmitted(false);
-        setFormData({
-            name: '',
-            rate: '',
-            review: ''
-        });
-    }
-
-    useEffect(() => 
-        isSubmitted && newReview(formData).finally(() => resetForm()), [isSubmitted]);
   
     return(
         <form>
