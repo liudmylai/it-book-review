@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import * as ReviewsAPI from '../services/reviews-api';
+import * as BooksAPI from '../services/itbooks-api';
 
 
 export const ReviewContext = createContext();
@@ -15,12 +16,22 @@ export function ReviewProvider(props) {
     });
     // state to store 'flag' value
     const [isSubmitted, setIsSubmitted] = useState(false);
+    // state to store list of books
+    const [bookList, setBookList] = useState();
+    // state to store the book item
+    const [book, setBook] = useState();
+    // use Effect Hook to get new releases books from the server
+    useEffect(() => 
+        BooksAPI.getNewBooks()
+            .then(resultData => setBookList(resultData))
+        , []
+    );
 
 
     // use Effect Hook to get initial info from the server
     useEffect(() => 
-    ReviewsAPI.getAllReviews()
-        .then(resultData => setData(resultData))
+        ReviewsAPI.getAllReviews()
+            .then(resultData => setData(resultData))
         , []
     );
     /**
@@ -56,7 +67,7 @@ export function ReviewProvider(props) {
 
     return(
         <ReviewContext.Provider value={{
-            data, formData, handleChange, handleSubmit
+            data, formData, handleChange, handleSubmit, bookList, book
         }}>
             {props.children}
         </ReviewContext.Provider> 
