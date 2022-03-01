@@ -27,6 +27,16 @@ export function ReviewProvider(props) {
         , []
     );
 
+    const [bookISBN, setBookISBN] = useState();
+    const [bookInfo, setBookInfo] = useState();
+
+    useEffect(() => 
+        bookISBN && BooksAPI.getBookByISBN(bookISBN)
+            .then(resultData => setBookInfo(resultData))
+            .finally(() => setBookISBN(null))
+        , [bookISBN]
+    );
+
 
     // use Effect Hook to get initial info from the server
     useEffect(() => 
@@ -67,7 +77,7 @@ export function ReviewProvider(props) {
 
     return(
         <ReviewContext.Provider value={{
-            data, formData, handleChange, handleSubmit, bookList, book
+            data, formData, handleChange, handleSubmit, bookList, book, bookInfo, setBookISBN
         }}>
             {props.children}
         </ReviewContext.Provider> 
