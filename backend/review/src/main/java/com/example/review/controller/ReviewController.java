@@ -28,7 +28,7 @@ public class ReviewController {
 	
 	//get reviews by ISBN
 	@GetMapping("/reviews/{isbn}")
-	public List<Review> getReviewsByIsbn(@PathVariable int isbn) {
+	public List<Review> getReviewsByIsbn(@PathVariable long isbn) {
 		return reviewRepo.findByIsbn(isbn);
 	}
 

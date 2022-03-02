@@ -1,16 +1,21 @@
 import ReviewItem from './ReviewItem';
 import { useContext } from 'react';
-import ReviewForm from './ReviewForm';
 import { ReviewContext } from '../contexts/ReviewContext';
 
 
 function ReviewList() {
-    const {data} = useContext(ReviewContext);
+    const { reviewsList } = useContext(ReviewContext);
 
-    return(
-        <div>
-            {data && data.map((review, index) => <ReviewItem review={review} key={index} />)}
-            <ReviewForm />
+    return (
+        <div className='custombox clearfix'>
+            <h4 className='small-title'>{reviewsList.length} Reviews</h4>
+            <div className='row'>
+                <div className='col-lg-12'>
+                    <div className='comments-list'>
+                        {reviewsList.map((review, index) => <ReviewItem review={review} key={index} />)}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

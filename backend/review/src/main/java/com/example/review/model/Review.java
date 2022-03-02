@@ -22,7 +22,7 @@ public class Review {
 	private int id;
 	
 	@Column(name="isbn")
-	private int isbn;
+	private long isbn;
 	
 	@Column(name="name")
 	private String name;
@@ -44,11 +44,11 @@ public class Review {
 		this.id = id;
 	}
 
-	public int getIsbn() {
+	public long getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
 

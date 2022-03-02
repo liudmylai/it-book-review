@@ -7,19 +7,18 @@ export const ReviewContext = createContext();
 
 export function ReviewProvider(props) {
     // state to store data
-    const [data, setData] = useState();
+    const [reviewsList, setReviewsList] = useState();
     // state to store user's input (new review)
     const [formData, setFormData] = useState({
         name: '',
         rate: '',
-        review: ''
+        review: '',
+        isbn: ''
     });
     // state to store 'flag' value
     const [isSubmitted, setIsSubmitted] = useState(false);
     // state to store list of books
     const [bookList, setBookList] = useState();
-    // state to store the book item
-    const [book, setBook] = useState();
     // use Effect Hook to get new releases books from the server
     useEffect(() => 
         BooksAPI.getNewBooks()
@@ -33,33 +32,30 @@ export function ReviewProvider(props) {
     useEffect(() => 
         bookISBN && BooksAPI.getBookByISBN(bookISBN)
             .then(resultData => setBookInfo(resultData))
-            .finally(() => setBookISBN(null))
+            // .finally(() => setBookISBN(null))
         , [bookISBN]
     );
 
 
     // use Effect Hook to get initial info from the server
     useEffect(() => 
-        ReviewsAPI.getAllReviews()
-            .then(resultData => setData(resultData))
-        , []
+        bookISBN && ReviewsAPI.getReviewsByISBN(bookISBN)
+            .then(resultData => setReviewsList(resultData))
+        , [bookISBN]
     );
-    /**
-     * Function name: handleChange
-     * @param {*} event 
-     * 
-     * Inside the function:
-     * 1. Add user's input (new review)
-     */
+
+    
+ 
+    // function to add user's input (new review)
     function handleChange(event) {
         const {name, value} = event.target;
         setFormData(prev => ({...prev, [name]: value}));
     }
 
     // function to submit the new form
-    
     function handleSubmit(event) {
         event.preventDefault();
+        setFormData(prev => ({...prev, isbn: bookISBN}));
         setIsSubmitted(true);
     }
 
@@ -69,7 +65,8 @@ export function ReviewProvider(props) {
         setFormData({
             name: '',
             rate: '',
-            review: ''
+            review: '',
+            isbn: ''
         });
     }
     useEffect(() => 
@@ -77,7 +74,7 @@ export function ReviewProvider(props) {
 
     return(
         <ReviewContext.Provider value={{
-            data, formData, handleChange, handleSubmit, bookList, book, bookInfo, setBookISBN
+            reviewsList, formData, handleChange, handleSubmit, bookList, bookInfo, setBookISBN
         }}>
             {props.children}
         </ReviewContext.Provider> 

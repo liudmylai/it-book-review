@@ -1,17 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ReviewContext } from "../contexts/ReviewContext";
 import Book from "./Book";
+import ReviewForm from "./ReviewForm";
+import ReviewList from "./ReviewList";
 
 function BookInfo() {
     const { isbn } = useParams();
-    const { setBookISBN, bookInfo } = useContext(ReviewContext);
+    const { setBookISBN, bookInfo, reviewsList } = useContext(ReviewContext);
 
-    isbn && setBookISBN(isbn);
+    useEffect(() => 
+        isbn && setBookISBN(isbn)
+        , [isbn]
+    );
+    
 
     return(
         <div>
             {bookInfo && <Book book={bookInfo} />} 
+            <ReviewForm />
+            {reviewsList && reviewsList.length > 0 && <ReviewList />}
         </div>
     );
 }

@@ -12,8 +12,14 @@ function getAllReviews() {
     return getAxios('reviews');
 }
 
+// get reviews by ISBN
+function getReviewsByISBN(isbn) {
+    const url = 'reviews/' + isbn;
+    return getAxios(url);
+}
+
 function newReview(review) {
     return axios.post(baseURL + 'review', review);
 }
 
-export {getAllReviews, newReview};
+export {getAllReviews, getReviewsByISBN, newReview};
