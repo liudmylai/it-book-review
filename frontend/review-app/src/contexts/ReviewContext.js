@@ -70,7 +70,11 @@ export function ReviewProvider(props) {
         });
     }
     useEffect(() => 
-    isSubmitted && ReviewsAPI.newReview(formData).finally(() => resetForm()), [isSubmitted]);
+        isSubmitted && ReviewsAPI.createNewReview(formData)
+            .then(response => setReviewsList(prev => ([response, ...prev])))
+            .finally(() => resetForm())
+        , [isSubmitted]
+    );
 
     return(
         <ReviewContext.Provider value={{

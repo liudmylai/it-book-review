@@ -1,3 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+footer {
+    padding: 3% 15% 2%;
+    text-align: center;
+}
+
+.book {
+    border: none;
+}
+
+.book img {
+    width: 100%;
+}
+
+.card-data {
+    margin: 0;
+    font-size: .875rem;
+}
+
+.card-desc {
+    margin-top: 2rem;
+}
+
+.small-title {
+    background: #edeff2 none repeat scroll 0 0;
+    font-size: 16px;
+    line-height: 1;
+    margin: 0;
+    padding: 0.6rem 1.5rem;
+    position: absolute;
+    text-align: center;
+    top: -18px;
+}
+
+.custombox {
+    position: relative;
+    padding: 3rem 2rem;
+    border: 1px dashed #dadada;
+}
 
 .form-wrapper .form-control {
     background: #fff none repeat scroll 0 0;
@@ -10,4 +53,38 @@
     margin-bottom: 1.4rem;
     min-height: 50px;
     text-transform: none;
+}
+
+.form-wrapper textarea {
+    min-height: 120px !important;
+    padding-top: 1rem;
+}
+
+.comments-list .media {
+    padding: 1rem;
+    margin-bottom: 15px;
+}
+
+.comments-list p {
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+}
+
+.comments-list small {
+    color: #999 !important;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+
+.media-body .btn-primary {
+    padding: 5px 15px !important;
+    font-size: 11px !important;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: 500;
 }

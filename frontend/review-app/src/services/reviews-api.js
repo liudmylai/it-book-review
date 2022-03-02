@@ -8,6 +8,12 @@ function getAxios(endPoint) {
         .catch(error => console.error(error));
 }
 
+function postAxios(endPoint, body) {
+    return axios.post(baseURL + endPoint, body)
+        .then(response => response.data)
+        .catch(error => console.error(error));
+}
+
 function getAllReviews() {
     return getAxios('reviews');
 }
@@ -18,8 +24,8 @@ function getReviewsByISBN(isbn) {
     return getAxios(url);
 }
 
-function newReview(review) {
-    return axios.post(baseURL + 'review', review);
+function createNewReview(review) {
+    return postAxios('review', review);
 }
 
-export {getAllReviews, getReviewsByISBN, newReview};
+export {getAllReviews, getReviewsByISBN, createNewReview};

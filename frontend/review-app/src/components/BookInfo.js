@@ -9,15 +9,15 @@ function BookInfo() {
     const { isbn } = useParams();
     const { setBookISBN, bookInfo, reviewsList } = useContext(ReviewContext);
 
-    useEffect(() => 
+    useEffect(() =>
         isbn && setBookISBN(isbn)
         , [isbn]
     );
-    
 
-    return(
-        <div>
-            {bookInfo && <Book book={bookInfo} />} 
+
+    return (
+        <div className='container'>
+            {bookInfo && <Book book={bookInfo} />}
             <ReviewForm />
             {reviewsList && reviewsList.length > 0 && <ReviewList />}
         </div>
