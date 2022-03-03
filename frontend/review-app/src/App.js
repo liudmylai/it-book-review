@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Main from './components/Main';
 import BookInfo from './components/BookInfo';
 import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults';
 
 function App() {
 
@@ -13,9 +15,13 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Header />
+          <SearchBar />
           <Routes>
             <Route path='/' element={<Main />} />
+            <Route path='/index.html' element={<Main />} />
             <Route path='/book-:isbn' element={<BookInfo />} />
+            <Route path='/search' element={<SearchResults />} />
+            <Route path='/search/page-:num' element={<SearchResults />} />
           </Routes>
           <Footer />
         </div>

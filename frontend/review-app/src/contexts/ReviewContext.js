@@ -26,6 +26,19 @@ export function ReviewProvider(props) {
         , []
     );
 
+    const [searchQuery, setSearchQuery] = useState();
+    //pages
+    const[currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => 
+        searchQuery && BooksAPI.searchBooks(searchQuery, currentPage)
+            .then(resultData => setBookList(resultData))
+        , [searchQuery, currentPage]
+    );
+    
+
+
+
     const [bookISBN, setBookISBN] = useState();
     const [bookInfo, setBookInfo] = useState();
 
@@ -78,7 +91,7 @@ export function ReviewProvider(props) {
 
     return(
         <ReviewContext.Provider value={{
-            reviewsList, formData, handleChange, handleSubmit, bookList, bookInfo, setBookISBN
+            reviewsList, formData, handleChange, handleSubmit, bookList, bookInfo, setBookISBN, setSearchQuery, setCurrentPage
         }}>
             {props.children}
         </ReviewContext.Provider> 

@@ -4,12 +4,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body {
-    /* background-color: #eee; */
-    /* background-image: url("https://www.transparenttextures.com/patterns/cubes.png"); */
-    padding: 0 16px;
-}
-
 header {
     background-color: #f5ba13;
     margin: auto -16px;
@@ -43,7 +37,7 @@ footer {
 **************************************/
 
 .section {
-    padding: 4rem 0;
+    padding-top: 4rem;
     display: block;
     position: relative;
 }

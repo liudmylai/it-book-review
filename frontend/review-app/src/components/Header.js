@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 function Header() {
     return (
         <header>
             <div className='container'>
-                <a className='navbar-brand' href='index.html'>IT Books</a>
+                <Link className='navbar-brand' to='/index.html'>IT Books</Link>
             </div>
         </header>
     );

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function BookItem(props) {
     const { book } = props;
     return (
-        <div class='pt-4 col-lg-3 col-md-6 col-sm-12 col-xs-12'>
+        <div className='pt-4 col-lg-3 col-md-6 col-sm-12 col-xs-12'>
             <div className='blog-box'>
                 <div className='post-media'>
                     <Link to={'/book-' + book.isbn13}>

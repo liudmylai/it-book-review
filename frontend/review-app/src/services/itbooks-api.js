@@ -10,7 +10,7 @@ function getAxios(endPoint) {
 
 // search books by title, author, ISBN or keywords
 function searchBooks(query, page) {
-    const url = 'search/' + query + (page && '/' + page);
+    const url = 'search/' + query + (page ? '/' + page : '');
     return getAxios(url);
 }
 

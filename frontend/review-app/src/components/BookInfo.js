@@ -6,8 +6,8 @@ import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 
 function BookInfo() {
-    const { isbn } = useParams();
     const { setBookISBN, bookInfo, reviewsList } = useContext(ReviewContext);
+    const { isbn } = useParams();
 
     useEffect(() =>
         isbn && setBookISBN(isbn)
