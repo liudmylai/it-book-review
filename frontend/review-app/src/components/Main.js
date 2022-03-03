@@ -2,9 +2,9 @@ import BookList from "./BookList";
 
 function Main() {
     return(
-        <div>
+        <section className='section text-muted'>
             <BookList />
-        </div>
+        </section>
     );
 }
 

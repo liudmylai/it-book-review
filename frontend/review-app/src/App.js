@@ -15,7 +15,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/books/:isbn' element={<BookInfo />} />
+            <Route path='/book-:isbn' element={<BookInfo />} />
           </Routes>
           <Footer />
         </div>

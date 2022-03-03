@@ -16,11 +16,13 @@ function BookInfo() {
 
 
     return (
-        <div className='container'>
-            {bookInfo && <Book book={bookInfo} />}
-            <ReviewForm />
-            {reviewsList && reviewsList.length > 0 && <ReviewList />}
-        </div>
+        <section className='section text-muted'>
+            <div className='container'>
+                {bookInfo && <Book book={bookInfo} />}
+                <ReviewForm />
+                {reviewsList && reviewsList.length > 0 && <ReviewList />}
+            </div>
+        </section>
     );
 }
 
