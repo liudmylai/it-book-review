@@ -2,11 +2,13 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ReviewContext } from '../contexts/ReviewContext';
 
-function Pagination() {
+function Pagination(props) {
     
-    const { bookList } = useContext(ReviewContext);
+    const { searchQuery } = useContext(ReviewContext);
 
-    const count = Math.ceil(bookList.total / 10);
+    const { totalPages, currentPage, searchTitle } = props;
+
+    const count = Math.ceil(totalPages / 10);
 
     function indexes(page, count) {
         let start, end;
@@ -46,22 +48,25 @@ function Pagination() {
         return result;
     }
     
+    const baseURL = '/search/' + encodeURI(searchQuery) + '/page-';
+
     return (
-        <div className='container'>
+        <div className='pt-5'>
+            <h6 className='text-muted'><small>{searchTitle}</small></h6>
             <nav>
-                <ul className='pagination'>
-                    <li className={bookList.page > 1 ? 'page-item' : 'page-item disabled'}><Link to={'/search/page-' + (Number(bookList.page) - 1)} className='page-link'>Previous</Link></li>
-                    {indexes(Number(bookList.page), count)
+                <ul className='pagination flex-wrap'>
+                    <li className={currentPage > 1 ? 'page-item' : 'page-item disabled'}><Link to={baseURL + (currentPage - 1)} className='page-link'>Previous</Link></li>
+                    {indexes(currentPage, count)
                         .map((page, index) => {
-                            if (page == bookList.page) {
+                            if (page === currentPage) {
                                 return (<li className='page-item active' key={index}><span className='page-link'>{page}</span></li>);
                             } else if (page === '...') {
                                 return (<li className='page-item disabled' key={index}><span className='page-link'>{page}</span></li>);
                             } else {
-                                return (<li className='page-item' key={index}><Link className='page-link' to={'/search/page-' + page}>{page}</Link></li>);
+                                return (<li className='page-item' key={index}><Link className='page-link' to={baseURL + page}>{page}</Link></li>);
                             }
                         })}
-                    <li className={bookList.page < count ? 'page-item' : 'page-item disabled'}><Link to={'/search/page-' + (Number(bookList.page) + 1)} className='page-link'>Next</Link></li>
+                    <li className={currentPage < count ? 'page-item' : 'page-item disabled'}><Link to={baseURL + (currentPage + 1)} className='page-link'>Next</Link></li>
                 </ul>
             </nav>
         </div>

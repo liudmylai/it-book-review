@@ -5,16 +5,16 @@
 }
 
 header {
-    background-color: #f5ba13;
+    background-color: #ffd103;
     margin: auto -16px;
     padding: 16px 32px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
   
 header a {
-    color: #fff;
+    color: #015eb5;
     /* font-family: "McLaren", cursive; */
-    font-weight: 200;
+    font-weight: bold;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,6 +31,11 @@ a {
 footer {
     padding: 3% 15% 2%;
     text-align: center;
+}
+
+h1.new-books {
+    border-bottom: 2px solid #ffd103;
+    color: #015eb5;
 }
 
 /* SECTIONS
@@ -137,7 +142,8 @@ footer {
 }
 
 .small-title {
-    background: #edeff2 none repeat scroll 0 0;
+    background: #ffd103 none repeat scroll 0 0;
+    color: #015eb5;
     font-size: 16px;
     line-height: 1;
     margin: 0;
@@ -150,12 +156,12 @@ footer {
 .custombox {
     position: relative;
     padding: 3rem 2rem;
-    border: 1px dashed #dadada;
+    border: 1px dashed #015eb5;
 }
 
 .form-wrapper .form-control {
     background: #fff none repeat scroll 0 0;
-    border: 1px dashed #dadada;
+    border: 1px dashed #015eb5;
     border-radius: 0;
     font-size: 14px;
     font-weight: 400;
@@ -190,10 +196,10 @@ footer {
     text-transform: uppercase;
 }
 
-.media-body .btn-primary {
+/* .media-body .btn-primary {
     padding: 5px 15px !important;
     font-size: 11px !important;
-}
+} */
 
 .username {
     font-size: 16px;
@@ -201,3 +207,9 @@ footer {
 }
 
 
+@media (min-width: 1200px) {
+    .col-xl-5th {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}

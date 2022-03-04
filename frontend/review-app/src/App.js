@@ -21,7 +21,8 @@ function App() {
             <Route path='/index.html' element={<Main />} />
             <Route path='/book-:isbn' element={<BookInfo />} />
             <Route path='/search' element={<SearchResults />} />
-            <Route path='/search/page-:num' element={<SearchResults />} />
+            <Route path='/search/:query' element={<SearchResults />} />
+            <Route path='/search/:query/page-:num' element={<SearchResults />} />
           </Routes>
           <Footer />
         </div>

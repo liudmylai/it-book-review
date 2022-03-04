@@ -13,10 +13,10 @@ function SearchBar() {
         event.preventDefault();
         let query = queryRef.current.value;
         if (query && query.trim().length > 0) {
-            setSearchQuery(query.trim());
+            // setSearchQuery(query.trim());
             setCurrentPage(1);
             queryRef.current.value = '';
-            navigate('/search');
+            navigate('/search/' + encodeURI(query.trim()));
         }
     }
 
@@ -25,7 +25,7 @@ function SearchBar() {
             <div className='container'>
                 <form onSubmit={searchSubmit} className='d-flex'>
                     <input id='bookName' ref={queryRef} className='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search' />
-                    <button className='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>
+                    <button className='btn btn-outline-primary my-2 my-sm-0' type='submit'>Search</button>
                 </form>
             </div>
         </section>

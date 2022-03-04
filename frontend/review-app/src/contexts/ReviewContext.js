@@ -18,12 +18,14 @@ export function ReviewProvider(props) {
     // state to store 'flag' value
     const [isSubmitted, setIsSubmitted] = useState(false);
     // state to store list of books
-    const [bookList, setBookList] = useState();
+    const [searchResult, setSearchResult] = useState();
+    //
+    const [newBooks, setNewBooks] = useState();
     // use Effect Hook to get new releases books from the server
     useEffect(() => 
-        BooksAPI.getNewBooks()
-            .then(resultData => setBookList(resultData))
-        , []
+        !newBooks && BooksAPI.getNewBooks()
+            .then(resultData => setNewBooks(resultData))
+        , [newBooks]
     );
 
     const [searchQuery, setSearchQuery] = useState();
@@ -32,7 +34,7 @@ export function ReviewProvider(props) {
 
     useEffect(() => 
         searchQuery && BooksAPI.searchBooks(searchQuery, currentPage)
-            .then(resultData => setBookList(resultData))
+            .then(resultData => setSearchResult(resultData))
         , [searchQuery, currentPage]
     );
     
@@ -91,7 +93,7 @@ export function ReviewProvider(props) {
 
     return(
         <ReviewContext.Provider value={{
-            reviewsList, formData, handleChange, handleSubmit, bookList, bookInfo, setBookISBN, setSearchQuery, setCurrentPage
+            reviewsList, formData, handleChange, handleSubmit, searchQuery, searchResult, bookInfo, setBookISBN, setSearchQuery, setCurrentPage, newBooks
         }}>
             {props.children}
         </ReviewContext.Provider> 

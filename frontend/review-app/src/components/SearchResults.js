@@ -5,26 +5,29 @@ import BookList from "./BookList";
 import Pagination from "./Pagination";
 
 function SearchResults() {
-    const {bookList, setCurrentPage} = useContext(ReviewContext);
-    const { num } = useParams();
+    const { searchResult, setCurrentPage, setSearchQuery } = useContext(ReviewContext);
+    const { query, num } = useParams();
 
-    useEffect(() =>
-        num && setCurrentPage(num)
-        , [num]
+    useEffect(() => {
+        num && setCurrentPage(num);
+        query && setSearchQuery(query);
+    }
+        , [num, query]
     );
-    
-    // const {page, total, books} = bookList;
-    // const handleClick = event => {
-    //     setNextPage(page + 1);
-    // }
 
-    return(
-        <div>
-            <BookList />
-            {bookList && <Pagination />}
-            {/* {total > books.length && 
-                <button onClick={handleClick}>Next</button>} */}
-        </div>
+    const searchTitle = searchResult && `${searchResult.page * 10 - 9} - ${Math.min(searchResult.page * 10, searchResult.total)} of ${searchResult.total} search results for "${query}"`;
+
+    return (
+        <section className='section text-muted'>
+            {searchResult &&
+                <div className='container'>
+                    <h5>{searchTitle}</h5>
+
+                    <BookList books={searchResult.books} />
+                    <Pagination totalPages={Number(searchResult.total)} currentPage={Number(searchResult.page)} searchTitle={searchTitle} />
+                </div>
+            }
+        </section>
     );
 }
 
