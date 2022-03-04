@@ -19,12 +19,16 @@ function SearchResults() {
 
     return (
         <section className='section text-muted'>
-            {searchResult &&
+            {searchResult && searchResult.total > 0 ?
                 <div className='container'>
                     <h5>{searchTitle}</h5>
-
                     <BookList books={searchResult.books} />
                     <Pagination totalPages={Number(searchResult.total)} currentPage={Number(searchResult.page)} searchTitle={searchTitle} />
+                </div>
+            :
+                <div className='container text-center'>
+                    <h2>Nothing turned up</h2>
+                    <h6>You can try again</h6>
                 </div>
             }
         </section>
