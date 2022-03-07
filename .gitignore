@@ -2,3 +2,6 @@
 .mvn
 mvnw
 mvnw.cmd
+
+### VS Code ###
+.vscode/

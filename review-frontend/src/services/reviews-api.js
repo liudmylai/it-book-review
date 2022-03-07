@@ -14,6 +14,12 @@ function postAxios(endPoint, body) {
         .catch(error => console.error(error));
 }
 
+function putAxios(endPoint, body) {
+    return axios.put(baseURL + endPoint, body)
+        .then(response => response.data)
+        .catch(error => console.error(error));
+}
+
 function getAllReviews() {
     return getAxios('reviews');
 }
@@ -28,4 +34,8 @@ function createNewReview(review) {
     return postAxios('review', review);
 }
 
-export {getAllReviews, getReviewsByISBN, createNewReview};
+function updateReview(review) {
+    return putAxios('review/' + review.id, review);
+}
+
+export {getAllReviews, getReviewsByISBN, createNewReview, updateReview};

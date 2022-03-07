@@ -1,23 +1,21 @@
 import { Link, Outlet } from "react-router-dom";
-import SearchBar from "./SearchBar";
 
-function Header() {
+function AdminPanel() {
     return (
         <>
             <header>
                 <nav className="navbar">
                     <div className='container'>
-                        <Link className='navbar-brand' to='/index.html'>IT Books</Link>
+                        <Link className='navbar-brand' to='/index.html'>IT Books: AdminPanel</Link>
                         <div className="navbar-nav">
-                            <Link className='nav-link' to='/admin/login'>Login</Link>
+                            <Link className='nav-link' to='/admin/logout'>Logout</Link>
                         </div>
                     </div>
                 </nav>
             </header>
-            <SearchBar />
             <Outlet />
         </>
     );
 }
 
-export default Header;
+export default AdminPanel;
