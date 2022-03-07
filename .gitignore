@@ -1,2 +1,4 @@
-!.mvn/wrapper/maven-wrapper.jar
 .settings
+.mvn
+mvnw
+mvnw.cmd
