@@ -3,7 +3,7 @@ import { AdminContext } from "../../contexts/AdminContext";
 
 function AdminReviewItem(props) {
     const { review } = props;
-    const { handleShowEditReview, expandReview } = useContext(AdminContext);
+    const { expandReview, handleShowEditReview, handleShowDeleteConfirm } = useContext(AdminContext);
 
     return (
         <div className='row'>
@@ -22,7 +22,7 @@ function AdminReviewItem(props) {
             <div className='col-lg-2'>
                 <button type="button" onClick={()=>expandReview(review.id)}>Show</button>
                 <button type="button" onClick={()=>handleShowEditReview(review)}>Edit</button>
-                <button type="button">X</button>
+                <button type="button" onClick={()=>handleShowDeleteConfirm(review)}>X</button>
             </div>
             {review.expand && <div className='col-lg-10'>
                 {review.review}

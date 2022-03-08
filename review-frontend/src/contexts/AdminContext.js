@@ -14,49 +14,64 @@ export function AdminProvider(props) {
         , []
     );
 
-    const [adminEditReviewFormData, setAdminEditReviewFormData] = useState({});
+    const [reviewData, setReviewData] = useState({});
 
     const [showEditReview, setShowEditReview] = useState(false);
-    const [isReviewFormSubmitted, setIsReviewFormSubmitted] = useState(false);
+    // const [isReviewFormSubmitted, setIsReviewFormSubmitted] = useState(false);
 
     const handleShowEditReview = (review) => {
-        setAdminEditReviewFormData(review);
+        setReviewData(review);
         setShowEditReview(true);
     }
 
     const handleCancelEditReview = () => {
-        setAdminEditReviewFormData({});
+        setReviewData({});
         setShowEditReview(false);
     }
 
     const handleSubmitEditReview = () => {
         setShowEditReview(false);
-        setIsReviewFormSubmitted(true);
-    }
-
-    useEffect(() =>
-        isReviewFormSubmitted && ReviewsAPI.updateReview(adminEditReviewFormData)
+        ReviewsAPI.updateReview(reviewData)
             .then(response => setAdminReviewsList(prev => prev.map(review => review.id === response.id ? response : review)))
-            .then(() => setAdminEditReviewFormData({}))
-            .finally(() => setIsReviewFormSubmitted(false))
-        , [isReviewFormSubmitted]
-    );
+            .finally(() => setReviewData({}))
+    }
 
     function expandReview(id) {
-        setAdminReviewsList(prev => prev.map(review => review.id === id ? {...review, expand: (!review.expand)} : review));
+        setAdminReviewsList(prev => prev.map(review => review.id === id ? { ...review, expand: (!review.expand) } : review));
     }
 
 
+    const [deleteStatus, setDeleteStatus] = useState({});
+
+    function handleShowDeleteConfirm(review) {
+        setReviewData(review);
+        setDeleteStatus({ status: 'confirm' });
+    }
+
+    function handleHideDeleteReview() {
+        setReviewData({});
+        setDeleteStatus({});
+    }
+
+    function handleConfirmDeleteReview(review) {
+        ReviewsAPI.deleteReview(review)
+            .then(response => setDeleteStatus({ status: 'success', message: response }))
+            .then(() => setAdminReviewsList(prev => prev.filter(element => element.id !== review.id)))
+    }
 
     return (
         <AdminContext.Provider value={{
             adminReviewsList,
-            adminEditReviewFormData,
-            setAdminEditReviewFormData,
+            reviewData,
+            setReviewData,
             showEditReview,
             handleShowEditReview,
             handleCancelEditReview,
             handleSubmitEditReview,
+            deleteStatus,
+            handleShowDeleteConfirm,
+            handleHideDeleteReview,
+            handleConfirmDeleteReview,
             expandReview
         }}>
             {props.children}

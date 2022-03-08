@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { AdminContext } from '../../contexts/AdminContext';
 import AdminEditReviewForm from './AdminEditReviewForm';
 
 function AdminEditReview() {
 
-    const { adminEditReviewFormData, setAdminEditReviewFormData, showEditReview, handleCancelEditReview, handleSubmitEditReview }  = useContext(AdminContext);
+    const { showEditReview, handleCancelEditReview, handleSubmitEditReview }  = useContext(AdminContext);
 
     return (
         <Modal show={showEditReview} centered scrollable size='lg' fullscreen='md-down' onHide={handleCancelEditReview}>

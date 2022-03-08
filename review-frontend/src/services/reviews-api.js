@@ -20,6 +20,12 @@ function putAxios(endPoint, body) {
         .catch(error => console.error(error));
 }
 
+function deleteAxios(endPoint, body) {
+    return axios.delete(baseURL + endPoint, body)
+        .then(response => response.data)
+        .catch(error => console.error(error));
+}
+
 function getAllReviews() {
     return getAxios('reviews');
 }
@@ -38,4 +44,7 @@ function updateReview(review) {
     return putAxios('review/' + review.id, review);
 }
 
-export {getAllReviews, getReviewsByISBN, createNewReview, updateReview};
+function deleteReview(review) {
+    return deleteAxios('review/' + review.id, review);
+}
+export {getAllReviews, getReviewsByISBN, createNewReview, updateReview, deleteReview};
