@@ -215,6 +215,28 @@ h1.new-books {
     font-weight: 500;
 }
 
+/******* admin section ***********/
+
+.accordion-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1.25rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    /* transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease; */
+}
+
+.accordion-review {
+    white-space: pre-wrap;
+
+}
 
 @media (min-width: 1200px) {
     .col-xl-5th {

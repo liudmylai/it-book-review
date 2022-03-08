@@ -5,12 +5,12 @@ import AdminEditReviewForm from './AdminEditReviewForm';
 
 function AdminEditReview() {
 
-    const { showEditReview, handleCancelEditReview, handleSubmitEditReview }  = useContext(AdminContext);
+    const { reviewData, showEditReview, handleCancelEditReview, handleSubmitEditReview }  = useContext(AdminContext);
 
     return (
         <Modal show={showEditReview} centered scrollable size='lg' fullscreen='md-down' onHide={handleCancelEditReview}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Review</Modal.Title>
+                <Modal.Title>Edit Review (ID: {reviewData.id})</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <AdminEditReviewForm />

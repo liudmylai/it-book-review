@@ -17,7 +17,6 @@ export function AdminProvider(props) {
     const [reviewData, setReviewData] = useState({});
 
     const [showEditReview, setShowEditReview] = useState(false);
-    // const [isReviewFormSubmitted, setIsReviewFormSubmitted] = useState(false);
 
     const handleShowEditReview = (review) => {
         setReviewData(review);

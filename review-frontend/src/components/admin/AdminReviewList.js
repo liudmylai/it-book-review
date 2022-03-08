@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { Accordion } from 'react-bootstrap';
+
 import { AdminContext } from "../../contexts/AdminContext";
 import AdminDeleteReview from "./AdminDeleteReview";
 import AdminEditReview from "./AdminEditReview";
@@ -10,11 +12,13 @@ function AdminReviewList() {
 
 
     return (
-        <section>
+        <section className='section text-muted'>
             {adminReviewsList &&
                 <div className='container'>
-                    <h4>{adminReviewsList.length} Reviews</h4>
-                    {adminReviewsList.map((review, index) => <AdminReviewItem review={review} key={index} />)}
+                    <h5>Reviews: {adminReviewsList.length}</h5>
+                    <Accordion flush>
+                        {adminReviewsList.map((review, index) => <AdminReviewItem review={review} key={index} />)}
+                    </Accordion>
                 </div>
             }
             <AdminEditReview />

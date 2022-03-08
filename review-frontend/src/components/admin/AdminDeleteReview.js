@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { AdminContext } from '../../contexts/AdminContext';
 
-
 function AdminDeleteReview() {
     const { deleteStatus, reviewData, handleHideDeleteReview, handleConfirmDeleteReview } = useContext(AdminContext);
     return (
