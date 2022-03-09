@@ -6,10 +6,10 @@ import javax.persistence.*;
 //| Field  | Type          | Null | Key | Default | Extra          |
 //+--------+---------------+------+-----+---------+----------------+
 //| id     | int           | NO   | PRI | NULL    | auto_increment |
-//| isbn   | int           | YES  |     | NULL    |                |
+//| isbn   | bigint        | YES  |     | NULL    |                |
 //| name   | varchar(30)   | YES  |     | NULL    |                |
 //| review | varchar(2000) | YES  |     | NULL    |                |
-//| date   | datetime      | YES  |     | NULL    |                |
+//| date   | bigint        | YES  |     | NULL    |                |
 //| rate   | int           | YES  |     | NULL    |                |
 //+--------+---------------+------+-----+---------+----------------+
 
@@ -31,7 +31,7 @@ public class Review {
 	private String review;
 	
 	@Column(name="date")
-	private String date;
+	private long date;
 	
 	@Column(name="rate")
 	private int rate;
@@ -68,11 +68,11 @@ public class Review {
 		this.review = review;
 	}
 
-	public String getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 

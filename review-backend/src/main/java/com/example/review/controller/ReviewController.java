@@ -23,7 +23,7 @@ public class ReviewController {
 
 	//get all reviews
 	@GetMapping("/reviews")
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<Review> getAllReviews() {
 		return reviewRepo.findAll();
 	}
@@ -36,7 +36,7 @@ public class ReviewController {
 
 	//get review by ID
 	@GetMapping("/review/{id}")
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Review> getReviewById(@PathVariable int id) {
 		Review review = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
 		return ResponseEntity.ok(review);                 
@@ -45,16 +45,14 @@ public class ReviewController {
 	//create new review
 	@PostMapping("/review")
 	public Review newReview(@RequestBody Review review) {
-	    LocalDateTime currentDate = LocalDateTime.now();
-	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		String date = currentDate.format(dateFormat);
+		long date = System.currentTimeMillis();
 		review.setDate(date);
 		return reviewRepo.save(review);
 	}
 	
 	//update review by ID
 	@PutMapping("/review/{id}")
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Review> updateReview(@PathVariable int id, @RequestBody Review review) {
 		Review r = reviewRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Review not found"));
 		r.updateFields(review);
@@ -64,7 +62,7 @@ public class ReviewController {
 	
 	//delete review by ID
 	@DeleteMapping("/review/{id}")
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteReview(@PathVariable int id) {
 		if (!reviewRepo.existsById(id)) {
 			throw new ResourceNotFoundException("Review not found");

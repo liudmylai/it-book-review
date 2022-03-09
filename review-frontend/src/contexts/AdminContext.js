@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import * as ReviewsAPI from '../services/reviews-api';
+import * as AuthAPI from '../services/auth-api';
 
 export const AdminContext = createContext();
 
@@ -7,11 +8,22 @@ export function AdminProvider(props) {
 
     const [adminReviewsList, setAdminReviewsList] = useState();
 
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    useEffect(() => setIsUserLoggedIn(AuthAPI.isUserLoggedIn()), []);
+
     // use Effect Hook to get all reviews from the server
     useEffect(() =>
-        ReviewsAPI.getAllReviews()
+        isUserLoggedIn && ReviewsAPI.getAllReviews()
             .then(resultData => setAdminReviewsList(resultData))
-        , []
+            .catch(error => {
+                if (error.response.status === 401) {
+                    setIsUserLoggedIn(false);
+                    AuthAPI.logout();
+                    window.location.href='/admin/login';
+                }
+            })
+        , [isUserLoggedIn]
     );
 
     const [reviewData, setReviewData] = useState({});
@@ -71,7 +83,8 @@ export function AdminProvider(props) {
             handleShowDeleteConfirm,
             handleHideDeleteReview,
             handleConfirmDeleteReview,
-            expandReview
+            expandReview,
+            setIsUserLoggedIn
         }}>
             {props.children}
         </AdminContext.Provider>

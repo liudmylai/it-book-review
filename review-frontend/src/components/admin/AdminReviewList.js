@@ -10,7 +10,6 @@ function AdminReviewList() {
 
     const { adminReviewsList } = useContext(AdminContext);
 
-
     return (
         <section className='section text-muted'>
             {adminReviewsList &&

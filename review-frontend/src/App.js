@@ -1,5 +1,6 @@
 import './App.css';
 import { ReviewProvider } from './contexts/ReviewContext';
+import { AdminProvider } from './contexts/AdminContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Header from './components/Header';
@@ -9,9 +10,10 @@ import Footer from './components/Footer';
 import SearchResults from './components/SearchResults';
 import Login from './components/admin/Login';
 import NoMatch from './components/NoMatch';
-import AdminPanel from './components/admin/AdminPanel';
+// import AdminPanel from './components/admin/AdminPanel';
 import AdminReviewList from './components/admin/AdminReviewList';
-import { AdminProvider } from './contexts/AdminContext';
+import AuthLayout from './components/AuthLayout';
+import AdminPanel from './components/admin/AdminPanel';
 
 function App() {
 
@@ -22,7 +24,7 @@ function App() {
           <div className="App">
             <Routes>
               <Route path='/admin' element={<AdminPanel />} >
-                <Route index element={<AdminReviewList />} />
+                <Route index element={<AuthLayout />} />
                 <Route path='login' element={<Login />} />
               </Route>
               <Route path='/' element={<Header />} >

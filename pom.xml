@@ -8,6 +8,7 @@
 	<name>review</name>
 	<packaging>pom</packaging>
 
+	<!-- https://dimitr.im/bundling-react-spring-boot -->
 	<modules>
 		<module>review-frontend</module>
 		<module>review-backend</module>
