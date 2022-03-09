@@ -40,7 +40,7 @@ function Login() {
         <section className='section text-muted'>
             <div className='container'>
                 <div className='mb-3'>
-                    <div class="alert alert-success" role="alert">
+                    <div className='alert alert-success' role='alert'>
                         <h6>Username: admin</h6>
                         <h6>Password: admin</h6>
                     </div>

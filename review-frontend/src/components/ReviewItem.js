@@ -25,11 +25,19 @@ function ReviewItem(props) {
         }
     }
 
+    function stars(rate) {
+        let stars = [];
+        for (let i = 0; i < 5; i++) {
+            stars[i] = (i < rate) ? 1 : 0;
+        }
+        return stars;
+    }
+
     return (
         <div className='media'>
             <div className='media-body'>
                 <h4 className='media-heading username'>{review.name} <small>Published {convertDate(review.date)}</small></h4>
-                <p>rate: {review.rate}</p>
+                <p>{stars(review.rate).map(star => star === 1 ? <i class="fas fa-star"/> : <i class="far fa-star"/>)}</p>
                 <p>{review.review}</p>
             </div>
         </div>
