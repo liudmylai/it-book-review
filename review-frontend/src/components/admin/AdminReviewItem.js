@@ -21,7 +21,7 @@ function AdminReviewItem(props) {
                     {review.name}
                 </div>
                 <div className='col-lg-3'>
-                    {review.date}
+                    {new Date(review.date).toLocaleString()}
                 </div>
             </Accordion.Header>
             <div className='col-lg-1'>
