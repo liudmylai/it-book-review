@@ -35,8 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
         	.httpBasic() // use Basic Authentication
-        	.and().cors() // by default uses a Bean by the name of corsConfigurationSource
-        	.and().csrf().disable()
+        	//.and().cors() // by default uses a Bean by the name of corsConfigurationSource
+        	//.and().csrf().disable()
             ;
     }
     
@@ -46,14 +46,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     // https://stackoverflow.com/questions/42016126/cors-issue-no-access-control-allow-origin-header-is-present-on-the-requested
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-    	CorsConfiguration configuration = new CorsConfiguration();
-    	configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    	configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "HEAD", "DELETE"));
-    	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    	source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
-    	return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//    	CorsConfiguration configuration = new CorsConfiguration();
+//    	configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+//    	configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "HEAD", "DELETE"));
+//    	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//    	source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
+//    	return source;
+//    }
    
 }

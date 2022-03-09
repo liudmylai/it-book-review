@@ -10,8 +10,6 @@ import Footer from './components/Footer';
 import SearchResults from './components/SearchResults';
 import Login from './components/admin/Login';
 import NoMatch from './components/NoMatch';
-// import AdminPanel from './components/admin/AdminPanel';
-import AdminReviewList from './components/admin/AdminReviewList';
 import AuthLayout from './components/AuthLayout';
 import AdminPanel from './components/admin/AdminPanel';
 
@@ -26,6 +24,7 @@ function App() {
               <Route path='/admin' element={<AdminPanel />} >
                 <Route index element={<AuthLayout />} />
                 <Route path='login' element={<Login />} />
+                <Route path='*' element={<NoMatch />} />
               </Route>
               <Route path='/' element={<Header />} >
                 <Route index element={<Main />} />
@@ -36,7 +35,6 @@ function App() {
                 <Route path='search/:query/page-:num' element={<SearchResults />} />
                 <Route path='*' element={<NoMatch />} />
               </Route>
-              <Route path='*' element={<NoMatch />} />
             </Routes>
             <Footer />
           </div>

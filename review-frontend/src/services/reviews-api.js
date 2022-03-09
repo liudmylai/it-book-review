@@ -4,32 +4,22 @@ const baseURL = 'https://it-book-review.herokuapp.com/api/';
 
 function getAxios(endPoint) {
     return axios.get(baseURL + endPoint)
-        .then(response => {
-            console.log('getAxios: ' + JSON.stringify(response));
-
-            return response.data})
-    // .catch(error => console.log(JSON.stringify(error)));
+        .then(response => response.data)
 }
 
 function postAxios(endPoint, body) {
     return axios.post(baseURL + endPoint, body)
         .then(response => response.data)
-        .catch(error => console.log(error));
 }
 
 function putAxios(endPoint, body) {
     return axios.put(baseURL + endPoint, body)
-        .then(response => {
-            console.log('putAxios: ' + JSON.stringify(response));
-
-            return response.data})
-        .catch(error => console.log(error));
+        .then(response => response.data)
 }
 
 function deleteAxios(endPoint, body) {
     return axios.delete(baseURL + endPoint, body)
         .then(response => response.data)
-        .catch(error => console.log(error));
 }
 
 function getAllReviews() {

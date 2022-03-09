@@ -6,13 +6,11 @@
 
 header {
     background-color: #ffd103;
-    /* padding: 16px 32px; */
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
   
 header a {
     color: #015eb5;
-    /* font-family: "McLaren", cursive; */
     font-weight: bold;
 }
 
@@ -275,10 +273,21 @@ h1.new-books {
 .rating:hover>input:checked~label:before {
     opacity: 0.4
 }
+/* NoMatch*/
+.not-found {
+    text-align: center;
+}
+.not-found h2 {
+    font-size: 7rem;
+    margin-top: 15vh;
+}
+.not-found h3 {
+    font-size: 2rem;
+}
 
 @media (min-width: 1200px) {
     .col-xl-5th {
-        flex: 0 0 auto;
-        width: 20%;
+    flex: 0 0 auto;
+    width: 20%;
     }
 }
