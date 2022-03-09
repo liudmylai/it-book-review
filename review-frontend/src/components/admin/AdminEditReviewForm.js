@@ -29,7 +29,7 @@ function AdminEditReviewForm() {
                         </div>
                         <div className='mb-3'>
                             <label htmlFor='rate' className='form-label'>Rate:</label>
-                            {<select id='rate' name='rate' onChange={handleChange} defaultValue={reviewData.rate}>
+                            {<select id='rate' name='rate' className='form-control' onChange={handleChange} defaultValue={reviewData.rate}>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
                                 <option value='3'>3</option>
