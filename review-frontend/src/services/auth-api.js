@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8080/api/';
+const baseURL = 'https://it-book-review.herokuapp.com/api/';
 
 function getAxios(endPoint, config) {
     return axios.get(baseURL + endPoint, config)
