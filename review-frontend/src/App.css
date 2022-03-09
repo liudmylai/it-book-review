@@ -163,6 +163,7 @@ h1.new-books {
 .custombox {
     position: relative;
     padding: 3rem 2rem;
+    margin-bottom: 3rem;
     border: 1px dashed #015eb5;
 }
 
