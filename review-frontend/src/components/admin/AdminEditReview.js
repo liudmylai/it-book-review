@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { AdminContext } from '../../contexts/AdminContext';
 import AdminEditReviewForm from './AdminEditReviewForm';
 
+// rendering the Edit Review modal in the admin panel
 function AdminEditReview() {
 
     const { reviewData, showEditReview, handleCancelEditReview, handleSubmitEditReview }  = useContext(AdminContext);

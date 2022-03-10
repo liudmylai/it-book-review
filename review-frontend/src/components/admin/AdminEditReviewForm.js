@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AdminContext } from "../../contexts/AdminContext";
 
+// rendering the Edit Review form in the admin panel
 function AdminEditReviewForm() {
     const { reviewData, setReviewData }  = useContext(AdminContext);
 

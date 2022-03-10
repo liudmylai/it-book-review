@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import * as AuthAPI from '../../services/auth-api';
 
+// rendering header for the admin panel
 function AdminPanel() {
     return (
         <>
@@ -14,6 +15,7 @@ function AdminPanel() {
                     </div>
                 </nav>
             </header>
+            {/* using this component to render the next Route in a set of matches */}
             <Outlet />
         </>
     );

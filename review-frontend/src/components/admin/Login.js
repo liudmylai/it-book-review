@@ -3,22 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { AdminContext } from '../../contexts/AdminContext';
 import * as AuthAPI from '../../services/auth-api';
 
+// rendering the loging form
 function Login() {
     const { setIsUserLoggedIn } = useContext(AdminContext);
-
+    // state to store user credentials and error message
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
         hasLoginFailed: false,
         errorMessage: null
     });
-
     const navigate = useNavigate();
+
+    // handling user login process
     function clickLogin() {
         AuthAPI.login(loginData.username, loginData.password)
             .then(() => {
+                // if the user is successfully authenticated, then register this in sessionStorage
                 AuthAPI.registerSuccessfulLogin(loginData.username);
+                // set the state
                 setIsUserLoggedIn(true);
+                // and redirect to admin panel
                 navigate('/admin');
             }).catch(error => {
                 let message = error.message;
@@ -30,7 +35,8 @@ function Login() {
                 setLoginData(prev => ({ ...prev, hasLoginFailed: true, errorMessage: message }));
             })
     };
-
+    
+    // handling contlolled form input
     function handleChange(event) {
         const { name, value } = event.target;
         setLoginData(prev => ({ ...prev, [name]: value }));

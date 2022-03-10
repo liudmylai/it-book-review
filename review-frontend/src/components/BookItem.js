@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+// rendering a single book item
 function BookItem(props) {
     const { book } = props;
     return (

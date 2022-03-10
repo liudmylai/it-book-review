@@ -1,6 +1,9 @@
+
+// rendering single review
 function ReviewItem(props) {
     const { review } = props;
 
+    // converting time range in milliseconds to user-friendly message
     function convertDate(timestamp) {
         let duration = Date.now() - timestamp;
 
@@ -24,7 +27,7 @@ function ReviewItem(props) {
             return days + " days ago";
         }
     }
-
+    // creating an array for further displaying as stars rating
     function stars(rate) {
         let stars = [];
         for (let i = 0; i < 5; i++) {

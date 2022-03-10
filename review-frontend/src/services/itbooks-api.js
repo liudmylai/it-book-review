@@ -1,11 +1,11 @@
 import axios from "axios";
-
+// Third party API
 const baseURL = 'https://api.itbook.store/1.0/';
 
 function getAxios(endPoint) {
     return axios.get(baseURL + endPoint)
         .then(response => response.data)
-        .catch(error => console.error(error));
+        .catch(error => console.log(error));
 }
 
 // search books by title, author, ISBN or keywords

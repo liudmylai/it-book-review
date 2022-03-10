@@ -2,20 +2,22 @@ import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReviewContext } from '../contexts/ReviewContext';
 
+// rendering search form
 function SearchBar() {
-    const {setSearchQuery, setCurrentPage} = useContext(ReviewContext);
-
+    const { setCurrentPage } = useContext(ReviewContext);
+    // setting the reference to the search input in the uncontrolled form
     const queryRef = useRef(null);
-
     const navigate = useNavigate();
-
+    // handling form submission
     const searchSubmit = event => {
         event.preventDefault();
         let query = queryRef.current.value;
         if (query && query.trim().length > 0) {
-            // setSearchQuery(query.trim());
+            // resetting pagination for the new search
             setCurrentPage(1);
+            // resetting search form
             queryRef.current.value = '';
+            // redirecting to search results
             navigate('/search/' + encodeURI(query.trim()));
         }
     }

@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import SearchResults from './components/SearchResults';
 import Login from './components/admin/Login';
 import NoMatch from './components/NoMatch';
-import AuthLayout from './components/AuthLayout';
+import AuthLayout from './components/admin/AuthLayout';
 import AdminPanel from './components/admin/AdminPanel';
 
 function App() {

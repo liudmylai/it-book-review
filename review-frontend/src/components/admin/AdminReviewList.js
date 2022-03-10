@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Accordion } from 'react-bootstrap';
-
 import { AdminContext } from "../../contexts/AdminContext";
 import AdminDeleteReview from "./AdminDeleteReview";
 import AdminEditReview from "./AdminEditReview";
 import AdminReviewItem from "./AdminReviewItem";
 
+// rendering reviews list in the admin panel
 function AdminReviewList() {
 
     const { adminReviewsList } = useContext(AdminContext);

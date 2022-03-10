@@ -1,3 +1,5 @@
+
+// rendering the book info
 function Book(props) {
     const { book } = props;
     return (

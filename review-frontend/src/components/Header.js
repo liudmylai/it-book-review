@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import * as AuthAPI from '../services/auth-api';
 import { Nav } from 'react-bootstrap';
 
+// rendering header with navigation menu
 function Header() {
     const isUserLoggedIn = AuthAPI.isUserLoggedIn();
 
@@ -25,6 +26,7 @@ function Header() {
                 </nav>
             </header >
             <SearchBar />
+            {/* using this component to render the next Route in a set of matches */}
             <Outlet />
         </>
     );

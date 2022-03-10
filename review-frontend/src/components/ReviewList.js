@@ -2,7 +2,7 @@ import ReviewItem from './ReviewItem';
 import { useContext } from 'react';
 import { ReviewContext } from '../contexts/ReviewContext';
 
-
+// render the total number of reviews and each review for the selected book
 function ReviewList() {
     const { reviewsList } = useContext(ReviewContext);
 

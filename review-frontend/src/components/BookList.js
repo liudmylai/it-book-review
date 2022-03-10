@@ -1,5 +1,6 @@
 import BookItem from './BookItem';
 
+// rendering a list of book items
 function BookList(props) {
     const { books } = props;
     return (

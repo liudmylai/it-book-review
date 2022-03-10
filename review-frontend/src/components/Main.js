@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { ReviewContext } from '../contexts/ReviewContext';
 import BookList from "./BookList";
 
+// rendering home page
 function Main() {
     const { newBooks } = useContext(ReviewContext);
 

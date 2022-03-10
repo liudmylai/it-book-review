@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Accordion, Button } from 'react-bootstrap';
-
 import { AdminContext } from "../../contexts/AdminContext";
 
+// rendering a single review in the admin panel
 function AdminReviewItem(props) {
     const { review } = props;
     const { handleShowEditReview, handleShowDeleteConfirm } = useContext(AdminContext);

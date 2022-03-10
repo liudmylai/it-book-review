@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { ReviewContext } from "../contexts/ReviewContext";
 
+// rendering controlled form to take user's input for the new review
 function ReviewForm() {
 
     const { formData, handleChange, handleSubmit } = useContext(ReviewContext);
-
 
     return (
         <div className="custombox clearfix">
