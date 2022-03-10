@@ -14,7 +14,7 @@ import com.example.review.model.Authentication;
 public class BasicAuthenticationController {
 
     @GetMapping(path = "auth")
-	@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Authentication userAuthentication() {
         return new Authentication("You are authenticated");
     }   

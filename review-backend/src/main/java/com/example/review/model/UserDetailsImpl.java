@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+// contains necessary information (username, password, authorities)
+// to build an Authentication object
 public class UserDetailsImpl implements UserDetails {
 	private String userName;
     private String password;
