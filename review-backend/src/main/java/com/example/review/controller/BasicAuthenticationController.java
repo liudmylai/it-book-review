@@ -15,8 +15,7 @@ public class BasicAuthenticationController {
 
     @GetMapping(path = "auth")
 	@PreAuthorize("hasRole('ADMIN')")
-    public Authentication helloWorldBean() {
-        //throw new RuntimeException("Some Error has Happened! Contact Support at ***-***");
+    public Authentication userAuthentication() {
         return new Authentication("You are authenticated");
     }   
 }
