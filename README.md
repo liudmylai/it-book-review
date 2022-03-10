@@ -5,7 +5,8 @@
 https://it-book-review.herokuapp.com/
 
 ### Frontend Specifications
-- Designed using Bootstrap v5.1
+- Implemented using ReactJS
+- Uses Bootstrap for styling
 - Made responsive by adding media queries
 - Uses [IT Bookstore API](https://api.itbook.store/) to collect book list
 - Uses axios to access backend RESTful API
