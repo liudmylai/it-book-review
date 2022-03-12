@@ -9,8 +9,8 @@ https://it-book-review.herokuapp.com/
 - Uses Bootstrap for styling
 - Made responsive by adding media queries
 - Uses [IT Bookstore API](https://api.itbook.store/) to collect books
-- Uses backend RESTful API to manage reviews
-- Uses Basic Authentication to access protected resources (Admin Panel)
+- Uses secured Backend REST Service API to manage reviews
+- Uses Basic Authentication at user login to access protected resources (Admin Panel)
 - Includes Components for CRUD operations
 
 ### Backend Specifications
