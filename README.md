@@ -5,17 +5,16 @@
 https://it-book-review.herokuapp.com/
 
 ### Frontend Specifications
-- Implemented using ReactJS
+- Implemented using ReactJS (with React Router, Axios, SessionStorage, Controlled & Uncontrolled Forms)
 - Uses Bootstrap for styling
 - Made responsive by adding media queries
-- Uses [IT Bookstore API](https://api.itbook.store/) to collect book list
-- Uses axios to access backend RESTful API
-- Uses Basic Authentication to access protected routes
+- Uses [IT Bookstore API](https://api.itbook.store/) to collect books
+- Uses backend RESTful API to manage reviews
+- Uses Basic Authentication to access protected resources (Admin Panel)
 - Includes Components for CRUD operations
 
 ### Backend Specifications
-- Implemented using Spring Boot
-- Uses Spring Security to support Basic Authentication
+- Implemented using Spring Boot (with Spring Security, Spring Web, Spring Data JPA)
 - Uses MySql as a SQL database
 - Uses Maven as a build tool
 - Uses MVC architecture
