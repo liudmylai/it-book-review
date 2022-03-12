@@ -26,16 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic() // use Basic Authentication
-        .and().csrf().disable()
-        .authorizeRequests()
-                .antMatchers("/api/review").permitAll()
-                .antMatchers("/api/review/*").hasRole("ADMIN")
-                .antMatchers("/api/reviews").hasRole("ADMIN")
-                .antMatchers("/api/reviews/*").permitAll()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/**").permitAll()
-        	.and().cors() // by default uses a Bean by the name of corsConfigurationSource
-    ;
+        .and().csrf().disable();
     }
     
     @Bean
