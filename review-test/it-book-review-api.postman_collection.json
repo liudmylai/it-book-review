@@ -7,16 +7,53 @@
 	"item": [
 		{
 			"name": "reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Get All Reviews\", () => {\r",
+							"    pm.expect(response.length).to.eql(11);\r",
+							"});\r",
+							"\r",
+							"const count = response.filter((tool) => tool.isbn == pm.collectionVariables.get(\"isbn\")).length;\r",
+							"pm.globals.set(\"count\", count);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/reviews",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/reviews",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"reviews"
@@ -26,21 +63,38 @@
 			"response": []
 		},
 		{
-			"name": "single review by ISBN",
+			"name": "reviews by ISBN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Get Reviews by ISBN\", () => {\r",
+							"    pm.expect(response.length).to.eql(pm.globals.get(\"count\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/reviews/9781642002088",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/reviews/{{isbn}}",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"reviews",
-						"9781642002088"
+						"{{isbn}}"
 					]
 				}
 			},
@@ -48,20 +102,40 @@
 		},
 		{
 			"name": "single review by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Review found\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response.isbn).to.eql(parseInt(pm.collectionVariables.get(\"isbn\")));\r",
+							"    pm.expect(response.name).to.eql(\"Edvard Boban\");\r",
+							"    pm.expect(response.date).to.eql(1646839229429);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/review/1",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/review/{{id}}",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"review",
-						"1"
+						"{{id}}"
 					]
 				}
 			},
@@ -69,6 +143,33 @@
 		},
 		{
 			"name": "create review",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomRate', Math.floor(Math.random() * 4));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"tempId\", response.id); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -80,15 +181,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"isbn\": \"9781718501089\",\r\n    \"name\": \"Ffff\",\r\n    \"review\": \"sdgsdwretsfgsg\",\r\n    \"rate\": 5\r\n}"
+					"raw": "{\r\n    \"isbn\": {{isbn}},\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"review\": \"{{$randomLoremParagraph}}\",\r\n    \"rate\": {{randomRate}}\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/review",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/review",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"review"
@@ -99,10 +198,53 @@
 		},
 		{
 			"name": "update review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Review Updated\", () => {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response.id).to.eql(parseInt(pm.globals.get(\"tempId\")));\r",
+							"    pm.expect(response.isbn).to.eql(parseInt(pm.collectionVariables.get(\"tempISBN\")));\r",
+							"    pm.expect(response.name).to.eql(pm.collectionVariables.get(\"tempName\"));\r",
+							"    pm.expect(response.review).to.eql(pm.collectionVariables.get(\"tempReview\"));\r",
+							"    pm.expect(response.rate).to.eql(parseInt(pm.collectionVariables.get(\"tempRate\")));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"tempId\", response.id); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -113,19 +255,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 4,\r\n    \"isbn\": 2,\r\n    \"name\": \"Ffff\",\r\n    \"review\": \"sdgsdwretsfgsg!!!!\",\r\n    \"date\": \"2022-02-26 12:45:56\",\r\n    \"rate\": 1\r\n}"
+					"raw": "{\r\n    \"id\": {{tempId}},\r\n    \"isbn\": {{tempISBN}},\r\n    \"name\": \"{{tempName}}\",\r\n    \"review\": \"{{tempReview}}\",\r\n    \"rate\": {{tempRate}}\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/review/4",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/review/{{tempId}}",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"review",
-						"4"
+						"{{tempId}}"
 					]
 				}
 			},
@@ -133,33 +273,79 @@
 		},
 		{
 			"name": "delete review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Review Deleted\", ()=> {\r",
+							"    const response = pm.response.text();\r",
+							"    pm.expect(response).to.eql(\"The review with id: \"+pm.globals.get(\"tempId\")+\" is removed from the database.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/review/23",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/review/{{tempId}}",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"review",
-						"23"
+						"{{tempId}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "authentication",
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Login OK\", ()=> {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.message).to.eql(\"You are authenticated\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -179,12 +365,10 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/auth",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/api/auth",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"auth"
@@ -195,22 +379,90 @@
 		},
 		{
 			"name": "logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logout",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/logout",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"logout"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://it-book-review.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "isbn",
+			"value": "1001643027241",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "3",
+			"type": "string"
+		},
+		{
+			"key": "tempName",
+			"value": "John Doe",
+			"type": "string"
+		},
+		{
+			"key": "tempReview",
+			"value": "Felis eget nunc lobortis mattis.",
+			"type": "string"
+		},
+		{
+			"key": "tempRate",
+			"value": "5",
+			"type": "string"
+		},
+		{
+			"key": "tempISBN",
+			"value": "9780008115784",
+			"type": "string"
 		}
 	]
 }
