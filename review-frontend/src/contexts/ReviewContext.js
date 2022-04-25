@@ -14,6 +14,8 @@ export function ReviewProvider(props) {
         review: '',
         isbn: ''
     });
+    const [reviewFormValidated, setReviewFormValidated] = useState(false);
+
     // state to store a "flag" value to check if a new review has been submitted
     const [isSubmitted, setIsSubmitted] = useState(false);
     // state to store the list of books on request
@@ -73,9 +75,11 @@ export function ReviewProvider(props) {
     // function to submit the new review by clicking on 'Submit Review' button
     function handleSubmit(event) {
         event.preventDefault();
-        // add the property isbn current value ISBN
-        setFormData(prev => ({...prev, isbn: bookISBN}));
-        setIsSubmitted(true);
+        if (event.currentTarget.checkValidity()) {
+            // add the property isbn current value ISBN
+            setFormData(prev => ({...prev, isbn: bookISBN}));
+            setIsSubmitted(true);
+        }
     }
 
     // function to reset form after submitting new review
@@ -102,6 +106,7 @@ export function ReviewProvider(props) {
         <ReviewContext.Provider value={{
             reviewsList, 
             formData, 
+            reviewFormValidated,
             handleChange, 
             handleSubmit, 
             searchQuery, 
